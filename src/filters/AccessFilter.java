@@ -26,13 +26,23 @@ public class AccessFilter implements Filter {
             throws java.io.IOException, javax.servlet.ServletException {
 
         HttpServletRequest httpReq = (HttpServletRequest) request;
+        HttpServletResponse httpResp = (HttpServletResponse) response;
         Cookie[] cookies = httpReq.getCookies();
+        String loginURI = httpReq.getContextPath() + "/";
+        boolean loginCookieFound = false;
         for (int  i = 0; i < cookies.length; i++){
             if (((HttpServletRequest) request).getCookies()[i].getName().equals("login") && !((HttpServletRequest) request).getCookies()[i].getValue().equals("")){
                 //HttpServletResponse httpResponse = (HttpServletResponse) response;
                 //response.sendRedirect("./main");
-                chain.doFilter(request, response);
+                //chain.doFilter(request, response);
+                loginCookieFound = true;
             }
+        }
+        boolean loginRequest = httpReq.getRequestURI().equals(loginURI);
+        if (loginCookieFound || loginRequest) {
+            chain.doFilter(request, response);
+        } else {
+            httpResp.sendRedirect(loginURI);
         }
             /*if (((HttpServletRequest) request).getCookies()[0].getName().equals("login") && !((HttpServletRequest) request).getCookies()[0].getValue().equals("")){
                 //request.getRequestDispatcher("/main").forward(request, response);
@@ -42,6 +52,6 @@ public class AccessFilter implements Filter {
                 chain.doFilter(request, response);
             }*/
 
-        httpReq.getRequestDispatcher("/").forward(request, response); //chain.doFilter(request, response);
+        //httpReq.getRequestDispatcher("/").forward(request, response); //chain.doFilter(request, response);
     }
 }

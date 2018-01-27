@@ -43,13 +43,14 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("userExists", "false");
                     request.getRequestDispatcher("/").forward(request, response);
                 }
+
                 Cookie cookieLogin = new Cookie("login", loginStr);
                 cookieLogin.setMaxAge(60*60);
                 response.addCookie(cookieLogin);
                 //request.getRequestDispatcher("/main").forward(request, response);
                // HttpServletResponse httpResponse = (HttpServletResponse) response;
-                //response.sendRedirect("./main");
-                request.getRequestDispatcher("/main").forward(request, response);
+                response.sendRedirect("./main");
+                //request.getRequestDispatcher("/main").forward(request, response);
 
                 break;
             case "check_login":
