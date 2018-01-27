@@ -6,16 +6,16 @@
 
     <servlet>
         <servlet-name>index</servlet-name>
-        <jsp-file>/index.jsp</jsp-file>
+        <jsp-file>/pages/index.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>register</servlet-name>
-        <jsp-file>sign_up.jsp</jsp-file>
+        <jsp-file>/pages/sign_up.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
@@ -31,20 +31,21 @@
         <url-pattern>/sign_up</url-pattern>
         <url-pattern>/sign_in</url-pattern>
         <url-pattern>/check_login</url-pattern>
+        <!--url-pattern>/</url-pattern-->
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>main_page</servlet-name>
-        <jsp-file>/main_page.html</jsp-file>
+        <servlet-name>script</servlet-name>
+        <jsp-file>resources/scripts/authent_script.js</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>main_page</servlet-name>
-        <url-pattern>/main_page</url-pattern>
+        <servlet-name>script</servlet-name>
+        <url-pattern>/script</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>main</servlet-name>
-        <jsp-file>/main.jsp</jsp-file>
+        <jsp-file>/pages/main.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>main</servlet-name>

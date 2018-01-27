@@ -18,10 +18,13 @@ public class LoginServlet extends HttpServlet {
     @EJB
     private ILogin login;
 
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String loginStr;
         String path = request.getRequestURI().substring(request.getContextPath().length());
+
         String[] pathArr = path.split("/");
         switch (pathArr[1]){
             case "sign_up":
@@ -31,7 +34,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("<html>" + "<head><title>result</title>" +
                         "</head><body >");
                 out.println("You've successfully signed up<br>");
-                out.println("<a href=\"./\">Sign in to continue</a><br>");
+                out.println("<a href=\"./index\">Sign in to continue</a><br>");
                 out.println("</body></html>");
                 out.close();
 
@@ -41,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 if (!login.userExists(loginStr, password)){
                     request.setAttribute("userExists", "false");
-                    request.getRequestDispatcher("/").forward(request, response);
+                    request.getRequestDispatcher("/index").forward(request, response);
                 }
 
                 Cookie cookieLogin = new Cookie("login", loginStr);
@@ -61,7 +64,9 @@ public class LoginServlet extends HttpServlet {
                     out1.flush();
                 }catch (Exception e){}
                 break;
+
         }
+
 
     }
 
