@@ -47,11 +47,7 @@ public class LoginServlet extends HttpServlet {
                 Cookie cookieLogin = new Cookie("login", loginStr);
                 cookieLogin.setMaxAge(60*60);
                 response.addCookie(cookieLogin);
-                //request.getRequestDispatcher("/main").forward(request, response);
-               // HttpServletResponse httpResponse = (HttpServletResponse) response;
                 response.sendRedirect("./main");
-                //request.getRequestDispatcher("/main").forward(request, response);
-
                 break;
             case "check_login":
                 loginStr = request.getParameter("login");
@@ -67,15 +63,6 @@ public class LoginServlet extends HttpServlet {
                 break;
         }
 
-       /* response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html>" + "<head><title>result</title>" +
-                "</head><body >");
-        out.println("<a href=\"./\">Back</a><br>");
-        out.println(request.getPathInfo());
-        out.println("</body></html>");
-        out.close();
-*/
     }
 
 

@@ -67,23 +67,20 @@
     Cookie cookie = null;
     Cookie[] cookies = null;
 
-    // Get an array of Cookies associated with the this domain
     cookies = request.getCookies();
 
     if( cookies != null ) {
-        out.println("<h2> Found Cookies Name and Value</h2>");
 
         for (int i = 0; i < cookies.length; i++) {
             cookie = cookies[i];
-            out.print("Hello, " + cookie.getName() + ",  ");
-            out.print("Value: " + cookie.getValue( )+" <br/>");
+            if(cookie.getName().equals("login")){
+                out.print("Hello, " + cookie.getValue() );
+            }
         }
-    } else {
-        out.println("<h2>No cookies founds</h2>");
     }
 %>
-b
-<button onclick="goOut()">Go out</button>
+
+<!--button onclick="goOut()">Go out</button-->
 
     <a href="./" onclick="goOut()">Go out</a>
 
