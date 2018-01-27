@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="postgres@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.7">
+    <root id="1"/>
+    <database id="2" parent="1" name="postgres">
+      <ObjectId>12938</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <role id="3" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="4" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="5" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="6" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="7" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="8" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <BypassRls>1</BypassRls>
+    </role>
+    <schema id="9" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2018-01-07.03:01:15.073</IntrospectionTimestamp>
+      <IntrospectionStateNumber>594</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="10" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="11" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="12" parent="2" name="pg_temp_1">
+      <ObjectId>11736</ObjectId>
+    </schema>
+    <schema id="13" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11737</ObjectId>
+    </schema>
+    <schema id="14" parent="2" name="information_schema">
+      <ObjectId>12648</ObjectId>
+    </schema>
+    <schema id="15" parent="2" name="s225128">
+      <ObjectId>16393</ObjectId>
+      <IntrospectionTimestamp>2018-01-07.22:03:48.548</IntrospectionTimestamp>
+      <IntrospectionStateNumber>635</IntrospectionStateNumber>
+      <Visible>1</Visible>
+    </schema>
+    <sequence id="16" parent="9" name="kid_ids">
+      <ObjectId>16565</ObjectId>
+      <StateNumber>576</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="17" parent="9" name="parent_ids">
+      <ObjectId>16572</ObjectId>
+      <StateNumber>583</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="18" parent="9" name="people_ids">
+      <ObjectId>16562</ObjectId>
+      <StateNumber>573</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="19" parent="9" name="qroup_ids">
+      <ObjectId>16581</ObjectId>
+      <StateNumber>592</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="20" parent="9" name="staff_ids">
+      <ObjectId>16584</ObjectId>
+      <StateNumber>594</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <table id="21" parent="15" name="class">
+      <ObjectId>16544</ObjectId>
+      <StateNumber>591</StateNumber>
+    </table>
+    <table id="22" parent="15" name="group">
+      <ObjectId>16458</ObjectId>
+      <StateNumber>628</StateNumber>
+    </table>
+    <table id="23" parent="15" name="kid">
+      <ObjectId>16437</ObjectId>
+      <StateNumber>566</StateNumber>
+    </table>
+    <table id="24" parent="15" name="kid_account">
+      <ObjectId>16463</ObjectId>
+      <StateNumber>580</StateNumber>
+    </table>
+    <table id="25" parent="15" name="med_info">
+      <ObjectId>16479</ObjectId>
+      <StateNumber>586</StateNumber>
+    </table>
+    <table id="26" parent="15" name="parent">
+      <ObjectId>16416</ObjectId>
+      <StateNumber>567</StateNumber>
+    </table>
+    <table id="27" parent="15" name="parent_contacts">
+      <ObjectId>16494</ObjectId>
+      <StateNumber>582</StateNumber>
+    </table>
+    <table id="28" parent="15" name="people">
+      <ObjectId>16394</ObjectId>
+      <StateNumber>571</StateNumber>
+    </table>
+    <table id="29" parent="15" name="staff">
+      <ObjectId>16516</ObjectId>
+      <StateNumber>628</StateNumber>
+    </table>
+    <table id="30" parent="15" name="staff_group">
+      <ObjectId>16591</ObjectId>
+      <StateNumber>633</StateNumber>
+    </table>
+    <table id="31" parent="15" name="tutor">
+      <ObjectId>16530</ObjectId>
+      <StateNumber>588</StateNumber>
+    </table>
+    <routine id="32" parent="15" name="on_class_insert">
+      <ObjectId>16579</ObjectId>
+      <StateNumber>590</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="33" parent="15" name="on_kid_account_insert">
+      <ObjectId>16568</ObjectId>
+      <StateNumber>624</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="34" parent="15" name="on_med_info_insert">
+      <ObjectId>16575</ObjectId>
+      <StateNumber>620</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="35" parent="15" name="on_parent_contacts_insert">
+      <ObjectId>16570</ObjectId>
+      <StateNumber>581</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="36" parent="15" name="on_staff_group_insert">
+      <ObjectId>16610</ObjectId>
+      <StateNumber>635</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="37" parent="15" name="on_tutor_insert">
+      <ObjectId>16577</ObjectId>
+      <StateNumber>587</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>trigger</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="38" parent="15" name="parent_inserterer">
+      <ObjectId>16590</ObjectId>
+      <StateNumber>606</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>void</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="39" parent="15" name="people_inserterer">
+      <ObjectId>16587</ObjectId>
+      <StateNumber>597</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>integer</ArgumentsDefinition>
+      <ResultsDefinition>void</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="40" parent="15" name="people_inserterer2">
+      <ObjectId>16588</ObjectId>
+      <StateNumber>600</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>integer</ArgumentsDefinition>
+      <ResultsDefinition>void</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="41" parent="15" name="people_inserterer3">
+      <ObjectId>16589</ObjectId>
+      <StateNumber>602</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>integer</ArgumentsDefinition>
+      <ResultsDefinition>void</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ConcurrencyKind>unsafe</ConcurrencyKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <column id="42" parent="21" name="class_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>572</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="43" parent="21" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>572</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="44" parent="21" name="date_time">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>572</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="45" parent="21" name="tutor_id">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>572</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="46" parent="21" name="group_id">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>572</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="47" parent="21" name="description">
+      <Position>6</Position>
+      <DataType>varchar(1000)|0</DataType>
+      <StateNumber>572</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="48" parent="21" name="class_pkey">
+      <ObjectId>16550</ObjectId>
+      <ColNames>class_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="49" parent="21" name="class_pkey">
+      <ObjectId>16551</ObjectId>
+      <ColNames>class_id</ColNames>
+      <UnderlyingIndexName>class_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="50" parent="21" name="class_tutor_id_fkey">
+      <ObjectId>16552</ObjectId>
+      <ColNames>tutor_id</ColNames>
+      <RefTableId>16530</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tutor</RefTableName>
+      <RefKeyName>tutor_pkey</RefKeyName>
+      <RefColNames>tutor_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="51" parent="21" name="class_group_id_fkey">
+      <ObjectId>16557</ObjectId>
+      <ColNames>group_id</ColNames>
+      <RefTableId>16458</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>group</RefTableName>
+      <RefKeyName>group_pkey</RefKeyName>
+      <RefColNames>group_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <trigger id="52" parent="21" name="trig_class_insert">
+      <ObjectId>16580</ObjectId>
+      <StateNumber>591</StateNumber>
+      <Turn>before-row</Turn>
+      <Events>IU</Events>
+      <FireMode>origin</FireMode>
+      <CallRoutineId>16579</CallRoutineId>
+    </trigger>
+    <column id="53" parent="22" name="group_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>593</StateNumber>
+      <DefaultExpression>nextval(&apos;qroup_ids&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="54" parent="22" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>564</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="55" parent="22" name="type_of_group">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <StateNumber>564</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="56" parent="22" name="group_pkey">
+      <ObjectId>16461</ObjectId>
+      <ColNames>group_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="57" parent="22" name="group_pkey">
+      <ObjectId>16462</ObjectId>
+      <ColNames>group_id</ColNames>
+      <UnderlyingIndexName>group_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="58" parent="23" name="kid_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>577</StateNumber>
+      <DefaultExpression>nextval(&apos;kid_ids&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="59" parent="23" name="person_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>563</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="60" parent="23" name="parent1_id">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>563</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="61" parent="23" name="parent2_id">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>563</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="62" parent="23" name="kid_pkey">
+      <ObjectId>16441</ObjectId>
+      <ColNames>kid_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="63" parent="23" name="kid_pkey">
+      <ObjectId>16442</ObjectId>
+      <ColNames>kid_id</ColNames>
+      <UnderlyingIndexName>kid_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="64" parent="23" name="kid_person_id_fkey">
+      <ObjectId>16443</ObjectId>
+      <ColNames>person_id</ColNames>
+      <RefTableId>16394</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>people</RefTableName>
+      <RefKeyName>people_pkey</RefKeyName>
+      <RefColNames>person_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="65" parent="23" name="kid_parent1_id_fkey">
+      <ObjectId>16448</ObjectId>
+      <ColNames>parent1_id</ColNames>
+      <RefTableId>16416</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>parent</RefTableName>
+      <RefKeyName>parent_pkey</RefKeyName>
+      <RefColNames>parent_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="66" parent="23" name="kid_parent2_id_fkey">
+      <ObjectId>16453</ObjectId>
+      <ColNames>parent2_id</ColNames>
+      <RefTableId>16416</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>parent</RefTableName>
+      <RefKeyName>parent_pkey</RefKeyName>
+      <RefColNames>parent_id</RefColNames>
+    </foreign-key>
+    <check id="67" parent="23" name="kid_check">
+      <ObjectId>16440</ObjectId>
+      <ColNames>parent1_id
+parent2_id</ColNames>
+      <Predicate>parent1_id &lt;&gt; parent2_id</Predicate>
+    </check>
+    <column id="68" parent="24" name="account_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>565</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="69" parent="24" name="kid_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>565</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="70" parent="24" name="group_id">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>565</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="71" parent="24" name="date_of_creating">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>565</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="72" parent="24" name="date_of_leaving">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>565</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <index id="73" parent="24" name="kid_account_pkey">
+      <ObjectId>16467</ObjectId>
+      <ColNames>account_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="74" parent="24" name="kid_account_pkey">
+      <ObjectId>16468</ObjectId>
+      <ColNames>account_id</ColNames>
+      <UnderlyingIndexName>kid_account_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="75" parent="24" name="kid_account_kid_id_fkey">
+      <ObjectId>16469</ObjectId>
+      <ColNames>kid_id</ColNames>
+      <RefTableId>16437</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>kid</RefTableName>
+      <RefKeyName>kid_pkey</RefKeyName>
+      <RefColNames>kid_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="76" parent="24" name="kid_account_group_id_fkey">
+      <ObjectId>16474</ObjectId>
+      <ColNames>group_id</ColNames>
+      <RefTableId>16458</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>group</RefTableName>
+      <RefKeyName>group_pkey</RefKeyName>
+      <RefColNames>group_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <check id="77" parent="24" name="kid_account_check">
+      <ObjectId>16466</ObjectId>
+      <ColNames>date_of_leaving
+date_of_creating</ColNames>
+      <Predicate>date_of_leaving &gt;= date_of_creating</Predicate>
+    </check>
+    <trigger id="78" parent="24" name="trig_kid_account_insert">
+      <ObjectId>16569</ObjectId>
+      <StateNumber>580</StateNumber>
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+      <FireMode>origin</FireMode>
+      <CallRoutineId>16568</CallRoutineId>
+    </trigger>
+    <column id="79" parent="25" name="med_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>566</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="80" parent="25" name="kid_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>566</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="81" parent="25" name="date_of_creating">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>566</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="82" parent="25" name="height">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>566</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="83" parent="25" name="weight">
+      <Position>5</Position>
+      <DataType>numeric(3,1)|0</DataType>
+      <StateNumber>566</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="84" parent="25" name="inoculations">
+      <Position>6</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>566</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="85" parent="25" name="current_deseases">
+      <Position>7</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>566</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="86" parent="25" name="med_info_pkey">
+      <ObjectId>16487</ObjectId>
+      <ColNames>med_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="87" parent="25" name="med_info_pkey">
+      <ObjectId>16488</ObjectId>
+      <ColNames>med_id</ColNames>
+      <UnderlyingIndexName>med_info_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="88" parent="25" name="med_info_kid_id_fkey">
+      <ObjectId>16489</ObjectId>
+      <ColNames>kid_id</ColNames>
+      <RefTableId>16437</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>kid</RefTableName>
+      <RefKeyName>kid_pkey</RefKeyName>
+      <RefColNames>kid_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <check id="89" parent="25" name="med_info_height_check">
+      <ObjectId>16482</ObjectId>
+      <ColNames>height</ColNames>
+      <Predicate>height &gt; 0</Predicate>
+    </check>
+    <check id="90" parent="25" name="med_info_weight_check">
+      <ObjectId>16483</ObjectId>
+      <ColNames>weight</ColNames>
+      <Predicate>weight &gt; (0)::numeric</Predicate>
+    </check>
+    <trigger id="91" parent="25" name="trig_med_info_insert">
+      <ObjectId>16576</ObjectId>
+      <StateNumber>586</StateNumber>
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+      <FireMode>origin</FireMode>
+      <CallRoutineId>16575</CallRoutineId>
+    </trigger>
+    <column id="92" parent="26" name="parent_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>584</StateNumber>
+      <DefaultExpression>nextval(&apos;parent_ids&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="93" parent="26" name="person_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>561</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="94" parent="26" name="parent_pkey">
+      <ObjectId>16419</ObjectId>
+      <ColNames>parent_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="95" parent="26" name="parent_pkey">
+      <ObjectId>16420</ObjectId>
+      <ColNames>parent_id</ColNames>
+      <UnderlyingIndexName>parent_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="96" parent="26" name="parent_person_id_fkey">
+      <ObjectId>16421</ObjectId>
+      <ColNames>person_id</ColNames>
+      <RefTableId>16394</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>people</RefTableName>
+      <RefKeyName>people_pkey</RefKeyName>
+      <RefColNames>person_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="97" parent="27" name="contacts_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>567</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="98" parent="27" name="parent_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>567</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="99" parent="27" name="date_of_creating">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>567</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="100" parent="27" name="home_address">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
+      <StateNumber>567</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="101" parent="27" name="job">
+      <Position>5</Position>
+      <DataType>varchar(200)|0</DataType>
+      <StateNumber>567</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="102" parent="27" name="job_phone_number">
+      <Position>6</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>567</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="103" parent="27" name="cell_phone_number">
+      <Position>7</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>567</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="104" parent="27" name="parent_contacts_pkey">
+      <ObjectId>16497</ObjectId>
+      <ColNames>contacts_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="105" parent="27" name="parent_contacts_pkey">
+      <ObjectId>16498</ObjectId>
+      <ColNames>contacts_id</ColNames>
+      <UnderlyingIndexName>parent_contacts_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="106" parent="27" name="parent_contacts_parent_id_fkey">
+      <ObjectId>16499</ObjectId>
+      <ColNames>parent_id</ColNames>
+      <RefTableId>16416</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>parent</RefTableName>
+      <RefKeyName>parent_pkey</RefKeyName>
+      <RefColNames>parent_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <trigger id="107" parent="27" name="trig_parent_contacts_insert">
+      <ObjectId>16571</ObjectId>
+      <StateNumber>582</StateNumber>
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+      <FireMode>origin</FireMode>
+      <CallRoutineId>16570</CallRoutineId>
+    </trigger>
+    <column id="108" parent="28" name="person_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>575</StateNumber>
+      <DefaultExpression>nextval(&apos;people_ids&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="109" parent="28" name="name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>558</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="110" parent="28" name="middle_name">
+      <Position>3</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>558</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="111" parent="28" name="surname">
+      <Position>4</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>558</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="112" parent="28" name="sex">
+      <Position>5</Position>
+      <DataType>boolean|0</DataType>
+      <StateNumber>558</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="113" parent="28" name="date_of_birth">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>558</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <index id="114" parent="28" name="people_pkey">
+      <ObjectId>16397</ObjectId>
+      <ColNames>person_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="115" parent="28" name="people_pkey">
+      <ObjectId>16398</ObjectId>
+      <ColNames>person_id</ColNames>
+      <UnderlyingIndexName>people_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="116" parent="29" name="staff_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>595</StateNumber>
+      <DefaultExpression>nextval(&apos;staff_ids&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="117" parent="29" name="person_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>570</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="118" parent="29" name="function">
+      <Position>3</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>570</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="119" parent="29" name="experience">
+      <Position>4</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>570</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="120" parent="29" name="staff_pkey">
+      <ObjectId>16523</ObjectId>
+      <ColNames>staff_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="121" parent="29" name="staff_pkey">
+      <ObjectId>16524</ObjectId>
+      <ColNames>staff_id</ColNames>
+      <UnderlyingIndexName>staff_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="122" parent="29" name="staff_person_id_fkey">
+      <ObjectId>16525</ObjectId>
+      <ColNames>person_id</ColNames>
+      <RefTableId>16394</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>people</RefTableName>
+      <RefKeyName>people_pkey</RefKeyName>
+      <RefColNames>person_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <check id="123" parent="29" name="Должность может быть только Няня, ">
+      <ObjectId>16519</ObjectId>
+      <ColNames>function</ColNames>
+      <Predicate>(function)::text = ANY ((ARRAY[&apos;Няня&apos;::character varying, &apos;Утренний воспитатель&apos;::character varying, &apos;Вечерний воспитатель&apos;::character varying])::text[])</Predicate>
+    </check>
+    <column id="124" parent="30" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>631</StateNumber>
+      <DefaultExpression>nextval(&apos;staff_group_ids&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="125" parent="30" name="staff_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>628</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="126" parent="30" name="group_id">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>628</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="127" parent="30" name="date_of_beginning">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>628</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="128" parent="30" name="date_of_end">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>628</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <index id="129" parent="30" name="staff_group_pkey">
+      <ObjectId>16595</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="130" parent="30" name="staff_group_pkey">
+      <ObjectId>16596</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>staff_group_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="131" parent="30" name="staff_group_staff_id_fkey">
+      <ObjectId>16597</ObjectId>
+      <ColNames>staff_id</ColNames>
+      <RefTableId>16516</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>staff</RefTableName>
+      <RefKeyName>staff_pkey</RefKeyName>
+      <RefColNames>staff_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="132" parent="30" name="staff_group_group_id_fkey">
+      <ObjectId>16602</ObjectId>
+      <ColNames>group_id</ColNames>
+      <RefTableId>16458</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>group</RefTableName>
+      <RefKeyName>group_pkey</RefKeyName>
+      <RefColNames>group_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <check id="133" parent="30" name="staff_group_check">
+      <ObjectId>16594</ObjectId>
+      <ColNames>date_of_end
+date_of_beginning</ColNames>
+      <Predicate>date_of_end &gt; date_of_beginning</Predicate>
+    </check>
+    <trigger id="134" parent="30" name="trig_staff_group_insert">
+      <ObjectId>16611</ObjectId>
+      <StateNumber>633</StateNumber>
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+      <FireMode>origin</FireMode>
+      <CallRoutineId>16610</CallRoutineId>
+    </trigger>
+    <column id="135" parent="31" name="tutor_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>571</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="136" parent="31" name="person_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>571</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="137" parent="31" name="experience">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>571</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="138" parent="31" name="specialty">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>571</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="139" parent="31" name="date_of_beginning">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>571</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="140" parent="31" name="date_of_end">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>571</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <index id="141" parent="31" name="tutor_pkey">
+      <ObjectId>16537</ObjectId>
+      <ColNames>tutor_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="142" parent="31" name="tutor_pkey">
+      <ObjectId>16538</ObjectId>
+      <ColNames>tutor_id</ColNames>
+      <UnderlyingIndexName>tutor_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="143" parent="31" name="tutor_person_id_fkey">
+      <ObjectId>16539</ObjectId>
+      <ColNames>person_id</ColNames>
+      <RefTableId>16394</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>people</RefTableName>
+      <RefKeyName>people_pkey</RefKeyName>
+      <RefColNames>person_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <check id="144" parent="31" name="tutor_check">
+      <ObjectId>16533</ObjectId>
+      <ColNames>date_of_end
+date_of_beginning</ColNames>
+      <Predicate>date_of_end &gt; date_of_beginning</Predicate>
+    </check>
+    <trigger id="145" parent="31" name="trig_tutor_insert">
+      <ObjectId>16578</ObjectId>
+      <StateNumber>588</StateNumber>
+      <Turn>before-row</Turn>
+      <Events>IU</Events>
+      <FireMode>origin</FireMode>
+      <CallRoutineId>16577</CallRoutineId>
+    </trigger>
+    <argument id="146" parent="32">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>trigger|0</DataType>
+    </argument>
+    <argument id="147" parent="33">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>trigger|0</DataType>
+    </argument>
+    <argument id="148" parent="34">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>trigger|0</DataType>
+    </argument>
+    <argument id="149" parent="35">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>trigger|0</DataType>
+    </argument>
+    <argument id="150" parent="36">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>trigger|0</DataType>
+    </argument>
+    <argument id="151" parent="37">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>trigger|0</DataType>
+    </argument>
+    <argument id="152" parent="38">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>void|0</DataType>
+    </argument>
+    <argument id="153" parent="39">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+    </argument>
+    <argument id="154" parent="39">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>void|0</DataType>
+    </argument>
+    <argument id="155" parent="40">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+    </argument>
+    <argument id="156" parent="40">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>void|0</DataType>
+    </argument>
+    <argument id="157" parent="41">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+    </argument>
+    <argument id="158" parent="41">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>void|0</DataType>
+    </argument>
+  </database-model>
+</dataSource>

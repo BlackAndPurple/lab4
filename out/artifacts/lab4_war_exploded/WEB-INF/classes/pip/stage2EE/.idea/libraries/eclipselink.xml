@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="eclipselink">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../eclipselink.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../postgresql-42.1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org.eclipse.persistence.jpars.source_2.7.0.v20170811-d680af5">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../jpa/org.eclipse.persistence.jpars.source_2.7.0.v20170811-d680af5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jpa/org.eclipse.persistence.jpa.modelgen.source_2.7.0.v20170811-d680af5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jpa/javax.persistence.source_2.2.0.v201708071007.jar!/" />
+    </SOURCES>
+  </library>
+</component>

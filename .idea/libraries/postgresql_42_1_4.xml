@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="postgresql-42.1.4">
+    <CLASSES>
+      <root url="jar://C:/course_projects/pip/postgresql-42.1.4.jar!/" />
+      <root url="jar://C:/course_projects/pip/eclipselink.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

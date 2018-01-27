@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="lab4:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/lab4_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="lab4/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lab4" />
+          <element id="library" level="project" name="javax.persistence.source_2.2.0.v201708071007" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="JPA 2.0-2.0" />
+          <element id="library" level="project" name="postgresql-42.1.4" />
+          <element id="library" level="project" name="javax.persistence_2.2.0.v201708071007" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

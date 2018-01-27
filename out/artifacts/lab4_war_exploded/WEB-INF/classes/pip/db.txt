@@ -1,0 +1,473 @@
+CREATE SCHEMA s225128;
+
+CREATE TABLE s225128.PEOPLE  (
+   PERSON_ID INTEGER PRIMARY KEY,
+   NAME VARCHAR(30) NOT NULL,
+   MIDDLE_NAME VARCHAR(30),
+   SURNAME VARCHAR(30) NOT NULL,
+   SEX BOOLEAN,
+   DATE_OF_BIRTH DATE   );
+
+CREATE TABLE s225128.PARENT (
+  PARENT_ID INTEGER PRIMARY KEY,
+  PERSON_ID INTEGER REFERENCES s225128.PEOPLE ON DELETE CASCADE );
+
+CREATE TABLE s225128.KID      (
+  KID_ID INTEGER PRIMARY KEY,
+  PERSON_ID INTEGER REFERENCES s225128.PEOPLE ON DELETE CASCADE,
+  PARENT1_ID INTEGER REFERENCES s225128.PARENT(PARENT_ID),
+  PARENT2_ID INTEGER REFERENCES s225128.PARENT(PARENT_ID),
+  CHECK (PARENT1_ID <> PARENT2_ID)      );
+
+CREATE TABLE s225128.GROUP (
+  GROUP_ID INTEGER PRIMARY KEY,
+  NAME VARCHAR(20) NOT NULL,
+  TYPE_OF_GROUP VARCHAR(20) );
+
+
+CREATE TABLE s225128.KID_ACCOUNT (
+  ACCOUNT_ID INTEGER PRIMARY KEY,
+  KID_ID INTEGER REFERENCES s225128.KID ON DELETE CASCADE,
+  GROUP_ID INTEGER REFERENCES s225128.GROUP ON DELETE CASCADE,
+  DATE_OF_CREATING DATE,
+  DATE_OF_LEAVING DATE,
+  CHECK (DATE_OF_LEAVING >= DATE_OF_CREATING)     );
+
+ CREATE TABLE s225128.MED_INFO (
+   MED_ID INTEGER PRIMARY KEY,
+   KID_ID INTEGER REFERENCES s225128.KID ON DELETE CASCADE,
+   DATE_OF_CREATING DATE NOT NULL, HEIGHT INTEGER CHECK (HEIGHT > 0),
+   WEIGHT NUMERIC(3,1) CHECK (WEIGHT > 0),
+   INOCULATIONS TEXT, CURRENT_DESEASES TEXT );
+
+CREATE TABLE s225128.PARENT_CONTACTS  (
+  CONTACTS_ID INTEGER PRIMARY KEY,
+  PARENT_ID INTEGER REFERENCES s225128.PARENT ON DELETE CASCADE,
+  DATE_OF_CREATING DATE NOT NULL,
+  HOME_ADDRESS VARCHAR(200),
+  JOB VARCHAR(200),
+  JOB_PHONE_NUMBER VARCHAR(30),
+  CELL_PHONE_NUMBER VARCHAR(30) );
+CREATE TABLE s225128.STAFF (
+  STAFF_ID INTEGER PRIMARY KEY,
+  PERSON_ID INTEGER REFERENCES s225128.PEOPLE ON DELETE CASCADE,
+  FUNCTION VARCHAR(30) NOT NULL
+    CONSTRAINT "Function must be Nanny/Morning kindergartener/Evening kindergartener"
+    CHECK (FUNCTION IN ('Nanny', 'Morning kindergartener', 'Evening kindergartener')) ,
+  EXPERIENCE TEXT );
+
+CREATE TABLE s225128.TUTOR (
+  TUTOR_ID INTEGER PRIMARY KEY,
+  PERSON_ID INTEGER REFERENCES s225128.PEOPLE ON DELETE CASCADE,
+  EXPERIENCE TEXT,
+  SPECIALTY VARCHAR(50) NOT NULL,
+  DATE_OF_BEGINNING DATE NOT NULL,
+  DATE_OF_END DATE,
+  CHECK ( DATE_OF_END > DATE_OF_BEGINNING) );
+
+CREATE TABLE s225128.CLASS (
+  CLASS_ID INTEGER PRIMARY KEY,
+  NAME VARCHAR(30) NOT NULL,
+  DATE_TIME TIMESTAMP,
+  TUTOR_ID INTEGER REFERENCES s225128.TUTOR ON DELETE CASCADE,
+  GROUP_ID INTEGER REFERENCES s225128.GROUP ON DELETE CASCADE,
+  DESCRIPTION VARCHAR(1000) );
+
+CREATE SEQUENCE people_ids;
+CREATE SEQUENCE kid_ids;
+CREATE SEQUENCE parent_ids;
+CREATE SEQUENCE qroup_ids;
+CREATE SEQUENCE staff_ids;
+CREATE SEQUENCE staff_group_ids;
+
+
+alter table s225128.PEOPLE
+   alter column PERSON_ID set default nextval('people_ids');
+
+alter table s225128.KID
+   alter column KID_ID set default nextval('kid_ids');
+
+alter table s225128.PARENT
+   alter column PARENT_ID set default nextval('GROUP_ids');
+
+alter table s225128.GROUP
+   alter column GROUP_ID set default nextval('parent_ids');
+
+alter table s225128.STAFF
+   alter column STAFF_ID set default nextval('staff_ids');
+
+alter table s225128.STAFF_GROUP
+   alter column ID set default nextval('staff_group_ids');
+
+
+CREATE OR REPLACE FUNCTION s225128.on_kid_account_insert() RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  ID INTEGER;
+  A INTEGER;
+  DATE_FLAG iNTEGER;
+  GROUP_COUNT integer;
+BEGIN
+  IF NEW.ACCOUNT_ID IS NULL THEN
+    ID = (SELECT MAX(ACCOUNT_ID) FROM s225128.KID_ACCOUNT);
+    IF ID IS NULL THEN
+      ID = 1;
+    ELSE ID = ID + 1;
+    END IF;
+    NEW.ACCOUNT_ID = ID;
+  END IF;
+  IF NEW.DATE_OF_CREATING IS NULL THEN
+    NEW.DATE_OF_CREATING=CURRENT_DATE;
+  ELSE
+    IF NEW.DATE_OF_CREATING > CURRENT_DATE THEN
+      RAISE 'Временной промежуток существования аккаунта ребенка некорректен';
+    END IF;  END IF;   --FIND OUT IF THERE IS NO DATE OF BIRTH
+     DATE_FLAG = (SELECT COUNT(*) FROM s225128.KID
+       JOIN s225128.PEOPLE ON s225128.KID.PERSON_ID=PEOPLE.PERSON_ID
+     WHERE NEW.KID_ID = s225128.KID.KID_ID AND DATE_OF_BIRTH IS NOT NULL);
+
+ IF DATE_FLAG <> 0 THEN
+   A = (SELECT COUNT(*) FROM s225128.KID
+     JOIN s225128.PEOPLE ON KID.PERSON_ID=s225128.PEOPLE.PERSON_ID
+   WHERE NEW.KID_ID = KID.KID_ID AND NEW.DATE_OF_CREATING>DATE_OF_BIRTH);
+   IF A = 0 THEN
+     RAISE 'Временной промежуток существования аккаунта ребенка некорректен';
+   END IF;
+ END IF;
+  GROUP_COUNT = (SELECT COUNT(*) FROM s225128.KID_ACCOUNT
+  WHERE NEW.GROUP_ID IS NOT NULL);
+  IF GROUP_COUNT <> 0 THEN
+    GROUP_COUNT=(SELECT COUNT(*) FROM s225128.KID_ACCOUNT
+    WHERE GROUP_ID = NEW.GROUP_ID);
+    IF GROUP_COUNT >= 20 THEN
+      RAISE 'Group overflow';
+    END IF;
+  END IF;
+  return NEW;
+END;
+$$;
+
+
+
+
+CREATE TRIGGER TRIG_KID_ACCOUNT_INSERT
+  BEFORE INSERT ON s225128.KID_ACCOUNT FOR EACH ROW
+  EXECUTE PROCEDURE s225128.on_kid_account_insert()
+
+ CREATE OR REPLACE FUNCTION s225128.on_parent_contacts_insert () RETURNS trigger
+  LANGUAGE plpgsql
+  AS $$
+  DECLARE
+    ID INTEGER;
+    BIRTH_FLAG INTEGER;
+    A INTEGER;
+  BEGIN
+    IF NEW.CONTACTS_ID IS NULL THEN
+      ID = (SELECT MAX(CONTACTS_ID) FROM s225128.PARENT_CONTACTS);
+      IF ID IS NULL THEN
+        ID = 1;
+      ELSE ID = ID + 1;
+      END IF;
+      NEW.CONTACTS_ID = ID;
+    END IF;
+    IF NEW.DATE_OF_CREATING IS NULL THEN
+      NEW.DATE_OF_CREATING=CURRENT_DATE;
+    END IF;   BIRTH_FLAG = (select COUNT(*) FROM s225128.PARENT
+    JOIN s225128.PEOPLE ON s225128.PARENT.PERSON_ID=PEOPLE.PERSON_ID
+  WHERE (NEW.PARENT_ID = PARENT.PARENT_ID) AND (PEOPLE.DATE_OF_BIRTH IS NOT NULL));
+    IF BIRTH_FLAG <> 0 THEN
+      A = (select COUNT(*) FROM s225128.PARENT
+        JOIN s225128.PEOPLE ON PARENT.PERSON_ID=PEOPLE.PERSON_ID
+      WHERE (NEW.PARENT_ID = PARENT.PARENT_ID) AND (NEW.DATE_OF_CREATING>PEOPLE.DATE_OF_BIRTH) AND (NEW.DATE_OF_CREATING<=CURRENT_DATE));
+      IF (A = 0) then
+        RAISE 'Некорректная дата создания записи';
+      end if;
+    END IF;
+
+  return NEW;
+  END;
+  $$;
+
+CREATE TRIGGER TRIG_PARENT_CONTACTS_INSERT
+  BEFORE INSERT ON S225128.PARENT_CONTACTS FOR EACH ROW
+EXECUTE PROCEDURE s225128.ON_PARENT_CONTACTS_INSERT();
+
+CREATE OR REPLACE FUNCTION s225128.on_med_info_insert () RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  ID INTEGER;
+  A INTEGER;
+  BIRTH_COUNT INTEGER;
+BEGIN
+  IF NEW.MED_ID IS NULL THEN
+    ID = (SELECT MAX(MED_ID) FROM MED_INFO);
+    IF ID IS NULL THEN
+      ID = 1;
+    ELSE ID = ID + 1;
+    END IF;
+    NEW.MED_ID = ID;
+  END IF;
+  IF NEW.DATE_OF_CREATING IS NULL THEN
+    NEW.DATE_OF_CREATING=CURRENT_DATE; END IF;
+  BIRTH_COUNT =(SELECT COUNT(*) FROM KID
+    JOIN PEOPLE ON KID.PERSON_ID=PEOPLE.PERSON_ID
+  WHERE (NEW.KID_ID = KID.KID_ID) AND (PEOPLE.DATE_OF_BIRTH IS NOT NULL));
+  IF BIRTH_COUNT <> 0 THEN
+    A = (SELECT COUNT(*) FROM KID
+      JOIN PEOPLE ON KID.PERSON_ID=PEOPLE.PERSON_ID
+    WHERE (NEW.KID_ID = KID.KID_ID) AND (NEW.DATE_OF_CREATING>PEOPLE.DATE_OF_BIRTH) AND (NEW.DATE_OF_CREATING<=CURRENT_DATE));
+    IF (A = 0) then RAISE 'Некорректная дата создания записи';
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+
+ CREATE TRIGGER TRIG_MED_INFO_INSERT
+   BEFORE INSERT ON S225128.MED_INFO FOR EACH ROW
+ EXECUTE PROCEDURE s225128.ON_MED_INFO_INSERT();
+
+CREATE OR REPLACE FUNCTION s225128.on_tutor_insert () RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  ID INTEGER;
+  BIRTH_FLAG INTEGER;
+  A INTEGER;
+BEGIN
+  IF NEW.TUTOR_ID IS NULL THEN
+    ID = (SELECT MAX(TUTOR_ID) FROM TUTOR);
+    IF ID IS NULL THEN
+      ID = 1;
+    ELSE ID = ID + 1;
+    END IF;
+    NEW.TUTOR_ID = ID;
+  END IF;
+  IF NEW.DATE_OF_BEGINNING IS NULL THEN
+    NEW.DATE_OF_BEGINNING=CURRENT_DATE;
+  END IF;
+  BIRTH_FLAG = (SELECT COUNT(*) FROM PEOPLE WHERE NEW.PERSON_ID = PEOPLE.PERSON_ID AND DATE_OF_BIRTH IS NOT NULL);
+  IF BIRTH_FLAG <> 0 THEN
+    A = (SELECT COUNT(*) FROM PEOPLE WHERE NEW.PERSON_ID = PEOPLE.PERSON_ID AND NEW.DATE_OF_BEGINNING > DATE_OF_BIRTH );
+    IF A = 0 THEN
+      RAISE 'Некорректная дата начала работы';
+    END IF;
+  END IF;     --IF (NEW.DATE_OF_END > CURRENT_DATE) THEN  --RAISE 'Некорректная дата окончания работы';   --END IF;
+  RETURN NEW;
+END;
+$$;
+
+
+CREATE TRIGGER TRIG_TUTOR_INSERT
+   BEFORE INSERT OR UPDATE ON S225128.TUTOR FOR EACH ROW
+ EXECUTE PROCEDURE s225128.ON_TUTOR_INSERT();
+
+CREATE OR REPLACE FUNCTION s225128.on_class_insert () RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  ID INTEGER;
+  A INTEGER;
+  DATE_OF_END_FLAG INTEGER;
+  BIRTH_FLAG INTEGER;
+BEGIN
+  IF NEW.CLASS_ID IS NULL THEN
+    ID = (SELECT MAX(CLASS_ID) FROM CLASS);
+    IF ID IS NULL THEN
+      ID = 1;
+    ELSE ID = ID + 1;
+    END IF;
+    NEW.CLASS_ID = ID;
+  END IF;
+
+    DATE_OF_END_FLAG = (SELECT COUNT(*) FROM TUTOR WHERE TUTOR.TUTOR_ID=NEW.TUTOR_ID                                           AND TUTOR.DATE_OF_END IS NOT NULL);     IF (DATE_OF_END_FLAG <> 0) THEN       A = (SELECT COUNT(*) FROM TUTOR           WHERE TUTOR.TUTOR_ID=NEW.TUTOR_ID                 AND (TUTOR.DATE_OF_BEGINNING <= NEW.DATE_TIME )           AND (TUTOR.DATE_OF_END >= NEW.DATE_TIME));       IF (A = 0) THEN RAISE 'Некорректная дата урока';       END IF;     ELSE A = (SELECT COUNT(*) FROM TUTOR WHERE TUTOR.TUTOR_ID=NEW.TUTOR_ID                                               AND TUTOR.DATE_OF_BEGINNING<=NEW.DATE_TIME);       IF (A = 0) THEN RAISE 'Некорректная дата урока';       END IF;     END IF;
+
+  RETURN NEW;
+END;
+$$ ;
+
+ CREATE TRIGGER TRIG_CLASS_INSERT
+   BEFORE INSERT OR UPDATE ON S225128.CLASS FOR EACH ROW
+ EXECUTE PROCEDURE s225128.ON_CLASS_INSERT();
+
+-----функции для вставки людей. Каждая для разных возрастов
+CREATE FUNCTION people_inserterer(integer)
+  RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+ N alias for $1;
+ rand INTEGER default 0 ;
+ length integer;
+ i INTEGER DEFAULT 1;
+ count integer default 0;
+ NAMES text[] := '{Addison,Adrian,Alex,Alexis,Andy,Aubrey,Avery,Bailey,Blaine,Blair,Brice,Cameron,Carson,Cary,Casey,' ||
+                  'Cody,Corey,Dane,Devon,Drew,Dustin,Emerson,Erin,Evan,Fabian,Florian,Francis,Hadley,Haiden,Harley,Hayden,' ||
+                  'Israel,Jade,Jaden,Jan,Jerry,Jordan,Jude,Julian,Kendall,Kennedy,Kerry,Lane,Lee,Lonnie,MacKenzie,Madison,' ||
+                  'Mason,Noel,Orion,Perry,Quinn,Raphael,Ravenel,Reese,Riley,Robin,Ryan,Shane,Shelby,Spencer,Sydney,' ||
+                  'Taylor,Terry,Tony,Tory,Tyler,Wynne,Zane}';
+  SURNAMES text[] :='{Giacalone,Greenlaw,Babetski,Westlock,Ruiz,Addison,Blackwolf,Ravenhorst,Levine,Tessington,' ||
+                    'Wing,Oliver,Younger,Patel,Rance,Pennington,Erickson,Burnand,Owen,Cassadine,Adair,Jefferies,Fenton,' ||
+                    'Scarebrook,Wise,Melville,Bobbin,Willis,Patterson,Edgeworth,Gagwilde,Nadler,Decker,Tiffey,Furmage,' ||
+                    'Beck,Pittman,Cross,Roberts,Curry,Taylor,Manning,Clark,Pearson,Freeman,Harvey,Russell,Evans,' ||
+                    'Henderson,Howard,Nelson,Carter,Williams,Coleman,Rivera,Cooper,Anderson,Simmons,Phillips,King,Campbell,' ||
+                    'Barnes,Bennett,Lewis,Foster,Reed,Allen,Smith,Sanders}';
+ NAME text := NULL;
+  MIDDLE_NAME text := NULL;
+  SURNAME TEXT := NULL;
+  SEX BOOL := FALSE;
+  BIRTHDAY DATE;
+
+  BEGIN
+ for i in 1..N loop
+  RAND := floor(random()*69)+1;
+ NAME:=NAMES[RAND];
+  rand := floor(random()*69)+1;
+  MIDDLE_NAME:=NAMES[rand];
+  RAND := floor(random()*69)+1;
+  SURNAME:=SURNAMES[RAND];
+  RAND := floor(random()*2)+0;
+  IF RAND = 1 THEN
+    SEX := TRUE;
+    ELSE SEX:=FALSE;
+  END IF;
+  BIRTHDAY =( select DATE '1960-01-01' +
+       random() * (TIMESTAMP '2014-01-01' -
+                   TIMESTAMP '1960-01-01'));
+  insert into s225128.PEOPLE(NAME, MIDDLE_NAME, SURNAME, SEX, DATE_OF_BIRTH) values(name, MIDDLE_NAME, SURNAME, SEX, BIRTHDAY);
+  NAME := '';
+  SEX:= NULL;
+
+
+ end loop;
+
+  END;
+$$;
+
+CREATE FUNCTION people_inserterer2(integer)
+  RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+ N alias for $1;
+ rand INTEGER default 0 ;
+ length integer;
+ i INTEGER DEFAULT 1;
+ count integer default 0;
+ NAMES text[] := '{Addison,Adrian,Alex,Alexis,Andy,Aubrey,Avery,Bailey,Blaine,Blair,Brice,Cameron,Carson,Cary,Casey,' ||
+                  'Cody,Corey,Dane,Devon,Drew,Dustin,Emerson,Erin,Evan,Fabian,Florian,Francis,Hadley,Haiden,Harley,Hayden,' ||
+                  'Israel,Jade,Jaden,Jan,Jerry,Jordan,Jude,Julian,Kendall,Kennedy,Kerry,Lane,Lee,Lonnie,MacKenzie,Madison,' ||
+                  'Mason,Noel,Orion,Perry,Quinn,Raphael,Ravenel,Reese,Riley,Robin,Ryan,Shane,Shelby,Spencer,Sydney,' ||
+                  'Taylor,Terry,Tony,Tory,Tyler,Wynne,Zane}';
+  SURNAMES text[] :='{Giacalone,Greenlaw,Babetski,Westlock,Ruiz,Addison,Blackwolf,Ravenhorst,Levine,Tessington,' ||
+                    'Wing,Oliver,Younger,Patel,Rance,Pennington,Erickson,Burnand,Owen,Cassadine,Adair,Jefferies,Fenton,' ||
+                    'Scarebrook,Wise,Melville,Bobbin,Willis,Patterson,Edgeworth,Gagwilde,Nadler,Decker,Tiffey,Furmage,' ||
+                    'Beck,Pittman,Cross,Roberts,Curry,Taylor,Manning,Clark,Pearson,Freeman,Harvey,Russell,Evans,' ||
+                    'Henderson,Howard,Nelson,Carter,Williams,Coleman,Rivera,Cooper,Anderson,Simmons,Phillips,King,Campbell,' ||
+                    'Barnes,Bennett,Lewis,Foster,Reed,Allen,Smith,Sanders}';
+ NAME text := NULL;
+  MIDDLE_NAME text := NULL;
+  SURNAME TEXT := NULL;
+  SEX BOOL := FALSE;
+  BIRTHDAY DATE;
+
+  BEGIN
+ for i in 1..N loop
+  RAND := floor(random()*69)+1;
+ NAME:=NAMES[RAND];
+  rand := floor(random()*69)+1;
+  MIDDLE_NAME:=NAMES[rand];
+  RAND := floor(random()*69)+1;
+  SURNAME:=SURNAMES[RAND];
+  RAND := floor(random()*2)+0;
+  IF RAND = 1 THEN
+    SEX := TRUE;
+    ELSE SEX:=FALSE;
+  END IF;
+  BIRTHDAY = (select DATE '2011-01-01' +
+       random() * (TIMESTAMP '2015-01-01' -
+                   TIMESTAMP '2010-01-01'));
+  insert into s225128.PEOPLE(NAME, MIDDLE_NAME, SURNAME, SEX, DATE_OF_BIRTH) values(name, MIDDLE_NAME, SURNAME, SEX, BIRTHDAY);
+  NAME := '';
+  SEX:= NULL;
+
+
+ end loop;
+
+  END;
+$$;
+
+CREATE FUNCTION people_inserterer3(integer)
+  RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+ N alias for $1;
+ rand INTEGER default 0 ;
+ length integer;
+ i INTEGER DEFAULT 1;
+ count integer default 0;
+ NAMES text[] := '{Addison,Adrian,Alex,Alexis,Andy,Aubrey,Avery,Bailey,Blaine,Blair,Brice,Cameron,Carson,Cary,Casey,' ||
+                  'Cody,Corey,Dane,Devon,Drew,Dustin,Emerson,Erin,Evan,Fabian,Florian,Francis,Hadley,Haiden,Harley,Hayden,' ||
+                  'Israel,Jade,Jaden,Jan,Jerry,Jordan,Jude,Julian,Kendall,Kennedy,Kerry,Lane,Lee,Lonnie,MacKenzie,Madison,' ||
+                  'Mason,Noel,Orion,Perry,Quinn,Raphael,Ravenel,Reese,Riley,Robin,Ryan,Shane,Shelby,Spencer,Sydney,' ||
+                  'Taylor,Terry,Tony,Tory,Tyler,Wynne,Zane}';
+  SURNAMES text[] :='{Giacalone,Greenlaw,Babetski,Westlock,Ruiz,Addison,Blackwolf,Ravenhorst,Levine,Tessington,' ||
+                    'Wing,Oliver,Younger,Patel,Rance,Pennington,Erickson,Burnand,Owen,Cassadine,Adair,Jefferies,Fenton,' ||
+                    'Scarebrook,Wise,Melville,Bobbin,Willis,Patterson,Edgeworth,Gagwilde,Nadler,Decker,Tiffey,Furmage,' ||
+                    'Beck,Pittman,Cross,Roberts,Curry,Taylor,Manning,Clark,Pearson,Freeman,Harvey,Russell,Evans,' ||
+                    'Henderson,Howard,Nelson,Carter,Williams,Coleman,Rivera,Cooper,Anderson,Simmons,Phillips,King,Campbell,' ||
+                    'Barnes,Bennett,Lewis,Foster,Reed,Allen,Smith,Sanders}';
+ NAME text := NULL;
+  MIDDLE_NAME text := NULL;
+  SURNAME TEXT := NULL;
+  SEX BOOL := FALSE;
+  BIRTHDAY DATE;
+
+  BEGIN
+ for i in 1..N loop
+  RAND := floor(random()*69)+1;
+ NAME:=NAMES[RAND];
+  rand := floor(random()*69)+1;
+  MIDDLE_NAME:=NAMES[rand];
+  RAND := floor(random()*69)+1;
+  SURNAME:=SURNAMES[RAND];
+  RAND := floor(random()*2)+0;
+  IF RAND = 1 THEN
+    SEX := TRUE;
+    ELSE SEX:=FALSE;
+  END IF;
+  BIRTHDAY = (select DATE '2011-01-01' +
+       random() * (TIMESTAMP '2016-01-01' -
+                   TIMESTAMP '2010-01-01'));
+  insert into s225128.PEOPLE(NAME, MIDDLE_NAME, SURNAME, SEX, DATE_OF_BIRTH) values(name, MIDDLE_NAME, SURNAME, SEX, BIRTHDAY);
+  NAME := '';
+  SEX:= NULL;
+
+
+ end loop;
+
+  END;
+$$;
+
+CREATE FUNCTION parent_inserterer()
+  RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+   BEGIN
+  insert into s225128.PARENT(PERSON_ID) SELECT PERSON_ID FROM s225128.people WHERE date_of_birth <= '1990-01-01' and person_id <= 250;
+
+     
+   END;
+$$;
+
+
+---пример использования
+
+SELECT s225128.PEOPLE_INSERTERER2(100);
+
+также можешь дабавить данных в остальные таблицы. По паре записей в ручную или же написать функцию

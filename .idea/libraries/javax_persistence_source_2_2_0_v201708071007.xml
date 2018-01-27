@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="javax.persistence.source_2.2.0.v201708071007">
+    <CLASSES>
+      <root url="file://C:/course_projects" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://C:/course_projects/pip/jpa/javax.persistence.source_2.2.0.v201708071007.jar!/" />
+      <root url="jar://C:/course_projects/pip/jpa/org.eclipse.persistence.jpa.modelgen.source_2.7.0.v20170811-d680af5.jar!/" />
+      <root url="jar://C:/course_projects/pip/jpa/org.eclipse.persistence.jpars.source_2.7.0.v20170811-d680af5.jar!/" />
+      <root url="file://C:/course_projects/pip/stage2EE/src" />
+      <root url="file://C:/course_projects/pip/stage2SE/src" />
+    </SOURCES>
+  </library>
+</component>
