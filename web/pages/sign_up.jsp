@@ -9,30 +9,15 @@
 <html>
 <head>
     <title>Registration</title>
-    <script src="./resources/scripts/authent_script.js"></script>
+    <script src="./resources/scripts/authent_script.js?version=1"></script>
+    <link rel="stylesheet" type="text/css" href="./resources/style/authent_style.css">
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script-->
+
 </head>
 <body>
-
-<form name="sign_up_form" method="post" action="sign_up">
-    <p>
-        <label>Create a login: </label>
-        <input name="login" placeholder="login" id="login" onkeyup="check_login();" required>
-        <label id = "error_label1"> </label>
-    </p>
-    <p>
-        <label>Create a password: </label>
-        <input name="password" placeholder="password" id="password1" required>
-    </p>
-    <p>
-        <label>Repeat the password: </label>
-        <input name="password2" placeholder="password" id="password2" onkeyup="check_equals();" required  >
-        <label id = "error_label"> </label>
-    </p>
-    <p>
-        <button type="submit" id="submit_button">Sign up</button>
-
-    </p>
-
-</form>
+<div id="app"></div>
+<script src="./public/SignUp-bundle.js?version=1"></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript"  src="./resources/scripts/authent_script.js?version=1"></script>
 </body>
 </html>

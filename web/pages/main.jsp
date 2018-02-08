@@ -9,11 +9,16 @@
 <html>
 <head>
     <title>Main page</title>
-    <script type="text/javascript"  src="./resources/scripts/authent_script.js">
-    </script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1"><link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="./resources/style/main_style.css">
+    <script type="text/javascript"  src="./resources/scripts/authent_script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./resources/style/main_style.css?version=1">
 </head>
 <body>
+
+<div id="app"></div>
 <%
     Cookie cookie = null;
     Cookie[] cookies = null;
@@ -28,6 +33,9 @@
     }
 %>
     <a href="./index" onclick="goOut()">Go out</a>
+<script src="./public/bundle.js"></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript"  src="./resources/scripts/authent_script.js"></script>
 
 </body>
 </html>
