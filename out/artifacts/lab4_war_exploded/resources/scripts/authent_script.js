@@ -1,7 +1,7 @@
 
 //alert("works!!");
 
-function setCookie(name, value, options) {
+/*function setCookie(name, value, options) {
     options = options || {};
 
     var expires = options.expires;
@@ -42,7 +42,7 @@ function goOut() {
 }
 
 
-function check_equals() {
+/*function check_equals() {
     var password2 = document.getElementById("password2");
     var password1 = document.getElementById("password1");
     var error = document.getElementById("error_label");
@@ -83,7 +83,7 @@ function check_login(){
 
 }
 
-
+*/
 import Modernizr from 'modernizr';
 
 

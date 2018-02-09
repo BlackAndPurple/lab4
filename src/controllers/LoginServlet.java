@@ -50,6 +50,8 @@ public class LoginServlet extends HttpServlet {
                 }
 
                 Cookie cookieLogin = new Cookie("login", loginStr);
+                request.getSession().setAttribute("login", loginStr);
+                request.getSession().setMaxInactiveInterval(60*20);
                 cookieLogin.setMaxAge(60*60);
                 response.addCookie(cookieLogin);
                 response.sendRedirect("./main");

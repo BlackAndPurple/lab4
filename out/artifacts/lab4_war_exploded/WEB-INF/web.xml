@@ -31,6 +31,7 @@
         <url-pattern>/sign_up</url-pattern>
         <url-pattern>/sign_in</url-pattern>
         <url-pattern>/check_login</url-pattern>
+        <url-pattern>/check_user</url-pattern>
         <!--url-pattern>/</url-pattern-->
     </servlet-mapping>
 
@@ -60,6 +61,16 @@
     <filter-mapping>
         <filter-name>accessFilter</filter-name>
         <url-pattern>/main</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>goOutFilter</filter-name>
+        <filter-class>
+            filters.GoOutFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>goOutFilter</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!--welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

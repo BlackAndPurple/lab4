@@ -26,16 +26,23 @@ public class AccessFilter implements Filter {
 
         HttpServletRequest httpReq = (HttpServletRequest) request;
         HttpServletResponse httpResp = (HttpServletResponse) response;
+        /*if (httpReq.getSession(false).isNew() == false) {
+            httpReq.getSession(false).invalidate();
+            httpReq.getSession(true);
+        }*/
         Cookie[] cookies = httpReq.getCookies();
         String loginURI = httpReq.getContextPath() + "/index";
-        boolean loginCookieFound = false;
+       /* boolean loginCookieFound = false;
         for (int  i = 0; i < cookies.length; i++){
             if (((HttpServletRequest) request).getCookies()[i].getName().equals("login") && !((HttpServletRequest) request).getCookies()[i].getValue().equals("")){
                 loginCookieFound = true;
             }
-        }
+        }*/
+       boolean loginFound = false;
+       if((httpReq.getSession().getAttribute("login") != null) && !httpReq.getSession().getAttribute("login").equals(""))
+           loginFound = true;
         boolean loginRequest = httpReq.getRequestURI().equals(loginURI);
-        if (loginCookieFound || loginRequest) {
+        if (/*loginCookieFound*/loginFound /*|| loginRequest*/) {
             chain.doFilter(request, response);
         } else {
             httpResp.sendRedirect(loginURI);
