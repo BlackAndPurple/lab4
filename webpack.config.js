@@ -5,7 +5,8 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         "SignUp": "./web/react/components/SignUpForm.js",
-        "SignIn": "./web/react/components/SignInForm.js"
+        "SignIn": "./web/react/components/SignInForm.js",
+        "MainPage":"./web/react/components/CoordForm.js"
     }, // входная точка - исходный файл
     output:{
         path: path.resolve(__dirname, './web/public'),     // путь к каталогу выходных файлов - папка public

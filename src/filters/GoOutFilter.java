@@ -19,8 +19,10 @@ public class GoOutFilter implements Filter {
         HttpServletRequest httpReq = (HttpServletRequest) request;
         HttpSession session = httpReq.getSession();
         String mainURI = httpReq.getContextPath() + "/main";
+        String checkURI = httpReq.getContextPath() + "/check";
         boolean mainRequest = httpReq.getRequestURI().equals(mainURI);
-        if (!mainRequest){
+        boolean checkRequest = httpReq.getRequestURI().equals(checkURI);
+        if (!mainRequest && !checkRequest){
             if ((session.getAttribute("login") != null) && !session.getAttribute("login").equals("")){
                 session.removeAttribute("login");
                 session.setMaxInactiveInterval(0);

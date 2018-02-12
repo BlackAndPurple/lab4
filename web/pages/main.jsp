@@ -34,7 +34,8 @@
     <script type="text/javascript"  src="./resources/scripts/main.js"></script>
 
 </head>
-<body>
+<body >
+
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -53,8 +54,8 @@
         </div>
     </div>
 </div>
-
-<div class = "container-fluid">
+<div id="g"></div>
+<div class = "container-fluid" >
 
     <div class="row">
         <div class="col-sm-6" id="left_column">
@@ -63,12 +64,12 @@
             </div>
 
         </div>
-        <div class="col-sm-6">Second column</div>
+        <div class="col-sm-6" id="right-column">Second column</div>
     </div>
 </div>
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script type="text/javascript"  src="./resources/scripts/main.js"></script>
-
+<script src="./public/MainPage-bundle.js?version=1"></script>
 </body>
 </html>

@@ -6,10 +6,13 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "immutable": "^3.8.2",
     "modernizr": "^3.5.0",
     "primereact": "^1.4.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
